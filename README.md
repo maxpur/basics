@@ -3,7 +3,7 @@ A collection of entry level C++ projects which serve other students to discover 
 
 ## Projects
 
-1. [Sudoku solver](Sudoku_Solver)
+1. [Sudoku solver](https://github.com/maxpur/basics/tree/master/Sudoku%20solver)
 - This soduko solver uses a simple brute force approach to solve every soduko you can imagine.
 - Details of its implementation can be found in the corresponding directory `Sudoku_Solver`
 - Not finished yet
