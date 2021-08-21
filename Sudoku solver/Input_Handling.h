@@ -11,8 +11,8 @@
         Logic &logic;
         void printInstructions();
         int resolveOption(std::string &);
-        Coordinate parseInput(std::string &);
-        bool checkInput(Coordinate coordinate);
+        DataPair parseInput(std::string &);
+        bool checkInput(DataPair dataPair);
     public:
         Input_Handling(Matchfield &matchfield, Logic &logic);
         void startSolver();

@@ -21,7 +21,7 @@ void Input_Handling::startSolver() {
     string input = " ";
     cout << "Please insert your command!" << endl;
     getline(cin, input);
-    Coordinate coordinate;
+    DataPair dataPair;
     while (1) {
         //Parse input
         switch (resolveOption(input)) {
@@ -30,7 +30,6 @@ void Input_Handling::startSolver() {
                 return;
             case solve:
                 logic.solve();
-                matchfield.printField();
                 break;
             case check:
                 cout << "Soduko is solveable: " << logic.checkSolvability() << endl;
@@ -40,11 +39,10 @@ void Input_Handling::startSolver() {
                 matchfield.printField();
                 break;
             case insert:
-                coordinate = parseInput(input);
-                if (checkInput(coordinate)) {
-                    matchfield.setCell(coordinate);
+                dataPair = parseInput(input);
+                if (checkInput(dataPair)) {
+                    matchfield.setCell(dataPair.row, dataPair.column, dataPair.cell.value, immutable);
                     matchfield.printField();
-                    logic.print();
                 } else {
                     cout << "Invalid input, please try it again!";
                 }
@@ -97,28 +95,28 @@ int Input_Handling::resolveOption(string &option) {
 /* Parse user input to a soduko field cell 
    Throws std::out_of_range exception in case of invalid parametters
    Return Coordinate with specified column and row values as well as cell value*/
-Coordinate Input_Handling::parseInput(string &input) {
-    Coordinate coordinate;
+DataPair Input_Handling::parseInput(string &input) {
+    DataPair dataPair;
     string delimiter = " ";
     cout << input << endl;
     try {
-        coordinate.row = stoi(input.substr(input.find(delimiter), input.find(delimiter) + 1));
+        dataPair.row = stoi(input.substr(input.find(delimiter), input.find(delimiter) + 1));
         input = input.erase(0, input.find(delimiter) + delimiter.length());
-        coordinate.column = stoi(input.substr(input.find(delimiter), input.find(delimiter) + 1));
+        dataPair.column = stoi(input.substr(input.find(delimiter), input.find(delimiter) + 1));
         input = input.erase(input.find(delimiter) - 1, input.find(delimiter) - 1 + delimiter.length());
-        coordinate.value = stoi(input.substr(input.find(delimiter, input.find(delimiter) + 1)));
-        coordinate.properties = immutable;
+        dataPair.cell.value = stoi(input.substr(input.find(delimiter, input.find(delimiter) + 1)));
+        dataPair.cell.properties = immutable;
     } catch(std::out_of_range &e) {
-        return coordinate;
+        return dataPair;
     }
-    return coordinate;
+    return dataPair;
 }
 
 /* Check out of range values every attribute of a Coordinate
    Due to a 9x9 field every value needs to be less or eqaul to 9 and greater or equal to 0 
    True if all values are valid */ 
-bool Input_Handling::checkInput(Coordinate coordinate) {
-    if (coordinate.row > matchfield.getSize() ||coordinate.column > matchfield.getSize() | coordinate.value > matchfield.getSize()) {
+bool Input_Handling::checkInput(DataPair dataPair) {
+    if (dataPair.row > matchfield.getSize() ||dataPair.column > matchfield.getSize() | dataPair.cell.value > matchfield.getSize()) {
         return false;
     }
     return true;
