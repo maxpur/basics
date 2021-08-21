@@ -7,7 +7,7 @@ using std::endl;
 
 /*  Initialize data fields with default value 0 */
 Matchfield::Matchfield(int size) :size(size) {
-
+    
 }
 
 /*  Print soduku field seperated by '|' and '-' */
@@ -65,15 +65,15 @@ void Matchfield::printLine(int index) {
 }
 
 /*  Set data field to given value specified by its x and y coordinates */
-void Matchfield::setCell(Coordinate coordinate) {
-    field[coordinate.row][coordinate.column].value = coordinate.value;
-    field[coordinate.row][coordinate.column].properties = coordinate.properties;
+void Matchfield::setCell(int row, int column , int value, CellProperties cellproperties) {
+    field[row][column].value = value;
+    field[row][column].properties = cellproperties;
 }
 
 /*  Get value of a data cell specified by its x and y coordinates 
-    Return value of the specified cell */
-int Matchfield::getCell(int x, int y) {
-    return field[x][y].value;
+    Return Coordinate object of the specified cell */
+Cell& Matchfield::getCell(int x, int y) {
+    return field[x][y];
 }
 
 /*  Get dimonsion of this soduko matchfield 
