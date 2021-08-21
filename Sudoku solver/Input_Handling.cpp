@@ -11,7 +11,7 @@ using std::endl;
 #define INSERT "insert"
 
 /*Initialize Matchfield and Logic instances*/
-Input_Handling::Input_Handling(Matchfield matchfield, Logic logic): matchfield(matchfield), logic(logic) {
+Input_Handling::Input_Handling(Matchfield &matchfield, Logic &logic):matchfield(matchfield),logic(logic) {
 
 }
 
@@ -21,6 +21,7 @@ void Input_Handling::startSolver() {
     string input = " ";
     cout << "Please insert your command!" << endl;
     getline(cin, input);
+    Coordinate coordinate;
     while (1) {
         //Parse input
         switch (resolveOption(input)) {
@@ -39,14 +40,17 @@ void Input_Handling::startSolver() {
                 matchfield.printField();
                 break;
             case insert:
-                Coordinate coordinate = parseInput(input);
+                coordinate = parseInput(input);
                 if (checkInput(coordinate)) {
                     matchfield.setCell(coordinate);
                     matchfield.printField();
+                    logic.print();
                 } else {
                     cout << "Invalid input, please try it again!";
                 }
                 break;
+            default: 
+                cout << "No matching command found." << endl;
         }
         cout << "Please insert your next command!" << endl;
         getline(cin, input);
