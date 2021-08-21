@@ -1,6 +1,6 @@
 #ifndef DATASTRUCTURES_H
 #define DATASTRUCTURES_H
-enum Cell {
+enum CellProperties {
     immutable,
     changeable
 };
@@ -10,13 +10,18 @@ enum InputOptions {
     solve,
     check,
     newField,
-    insert
+    insert,
+    print
 };
 
-struct Coordinate {
-    int row = -1;
-    int column = -1;
+struct Cell {
     int value = 0;
     int properties = changeable;
+};
+
+struct DataPair {
+    Cell cell;
+    int row;
+    int column;
 };
 #endif
