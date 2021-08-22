@@ -41,7 +41,12 @@ void Input_Handling::startSolver() {
             case insert:
                 dataPair = parseInput(input);
                 if (checkInput(dataPair)) {
-                    matchfield.setCell(dataPair.row, dataPair.column, dataPair.cell.value, immutable);
+                    if (dataPair.cell.value != 0) {
+                        matchfield.setCell(dataPair.row, dataPair.column, dataPair.cell.value, immutable);
+                    } else {
+                        matchfield.setCell(dataPair.row, dataPair.column, dataPair.cell.value, changeable);
+
+                    }
                     matchfield.printField();
                 } else {
                     cout << "Invalid input, please try it again!";

@@ -87,6 +87,7 @@ void Matchfield::reset() {
     for (int row = 0; row < size; row++) {
         for (int column = 0; column < size; column++) {
             field[row][column].value = 0;
+            field[row][column].properties = changeable;
         } 
     }
 }
