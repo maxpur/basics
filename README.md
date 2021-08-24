@@ -10,7 +10,7 @@ A collection of entry level C++ projects which serve other students to discover 
 ## Usage
 Every project comes with an [Makefile](https://en.wikipedia.org/wiki/Make_(software)). You can use it to compile the project instead of doing it manually.
 In case you use the Makefile please make sure you have installed a C++ compiler g++ as well as Make. Afterwards you can use the following commands to execute the code (in case of an unix system):<br/>
-1. `make` (<br/>
+1. `make` <br/>
 2. `./<name of the directory> (whitespace is replaced by underscore)`<br/>
 
 If you want to delete every .o file that will be created during the compiling process you can run:<br/>
